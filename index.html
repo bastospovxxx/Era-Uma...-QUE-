@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17142b">
+  <title>ERA UMA VEZ — histórias em grupo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">✦</div>
+      <div><h1>ERA UMA VEZ</h1><p>Uma história. Muitas imaginações.</p></div>
+      <span class="status-pill" id="connectionStatus">Modo demonstração</span>
+    </header>
+
+    <main>
+      <section class="panel setup-panel" id="setupPanel">
+        <div class="section-heading">
+          <div><span class="eyebrow">ENTRE NA AVENTURA</span><h2>Vamos criar uma história?</h2></div>
+          <span class="sparkle">✧</span>
+        </div>
+        <div class="setup-grid">
+          <label>Seu nome
+            <input id="playerName" maxlength="24" placeholder="Ex.: Bastos" autocomplete="nickname">
+          </label>
+          <label>Código da sala
+            <input id="roomCode" maxlength="8" placeholder="Ex.: DRAGAO" autocapitalize="characters">
+          </label>
+        </div>
+        <div class="button-row">
+          <button class="button primary" id="createRoomBtn">Criar sala</button>
+          <button class="button secondary" id="joinRoomBtn">Entrar na sala</button>
+          <button class="button ghost" id="demoBtn">Jogar demonstração</button>
+        </div>
+        <p class="hint" id="setupMessage">Para salas online, configure o Realtime Database no arquivo <code>firebase-config.js</code>.</p>
+      </section>
+
+      <section class="game-layout hidden" id="gamePanel">
+        <div class="main-column">
+          <section class="panel story-panel">
+            <div class="story-header">
+              <div><span class="eyebrow">A HISTÓRIA COMPARTILHADA</span><h2 id="roomTitle">Sala</h2></div>
+              <div class="turn-chip"><span class="pulse"></span><span id="turnStatus">Aguardando início</span></div>
+            </div>
+            <div class="story-scroll" id="storyList">
+              <div class="empty-story"><div class="empty-icon">📖</div><h3>Era uma vez...</h3><p>A primeira frase está esperando por vocês.</p></div>
+            </div>
+            <div class="composer">
+              <label for="storyInput">Continue a história</label>
+              <textarea id="storyInput" maxlength="500" rows="3" placeholder="Era uma vez um dragão que encontrou..."></textarea>
+              <div class="composer-footer"><span id="charCount">0/500</span><button class="button primary" id="addStoryBtn">Adicionar trecho ↗</button></div>
+            </div>
+          </section>
+          <section class="panel gallery-panel">
+            <div class="section-heading"><div><span class="eyebrow">IMAGENS DA HISTÓRIA</span><h2>O mundo ganha forma</h2></div><span class="gallery-icon">▧</span></div>
+            <p class="muted">O jogo procura ilustrações no Openverse. As imagens não são geradas por IA; cada uma pode ter uma licença diferente.</p>
+            <div id="imageStatus" class="image-status">As imagens relacionadas aos trechos aparecerão aqui.</div>
+            <div class="image-grid" id="imageGrid"></div>
+          </section>
+        </div>
+        <aside class="side-column">
+          <section class="panel room-panel">
+            <span class="eyebrow">SUA SALA</span>
+            <div class="room-code-row"><strong id="activeRoomCode">DEMO</strong><button class="icon-button" id="copyCodeBtn" title="Copiar código" aria-label="Copiar código">⧉</button></div>
+            <p class="muted" id="roomHelp">Demonstração local neste navegador.</p>
+            <div class="divider"></div>
+            <div class="section-heading compact"><h3>Jogadores</h3><span class="count-badge" id="playerCount">1</span></div>
+            <ul class="player-list" id="playerList"></ul>
+            <button class="button secondary full-width" id="startBtn">Começar história</button>
+            <button class="button ghost full-width" id="leaveBtn">Sair da sala</button>
+          </section>
+          <section class="panel rules-panel">
+            <span class="eyebrow">COMO JOGAR</span>
+            <ul class="rules-list">
+              <li><span>01</span> Cada pessoa acrescenta um trecho.</li>
+              <li><span>02</span> Escreva algo que combine com a história.</li>
+              <li><span>03</span> Buscamos imagens relacionadas automaticamente.</li>
+              <li><span>04</span> A diversão é criar o final juntos.</li>
+            </ul>
+          </section>
+        </aside>
+      </section>
+    </main>
+    <footer>ERA UMA VEZ <span>·</span> Feito para imaginar junto.</footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
